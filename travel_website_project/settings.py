@@ -40,7 +40,11 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     
     # Local Apps
-    "home.apps.HomeConfig"
+    "home.apps.HomeConfig",
+    "admin_panel.apps.AdminPanelConfig",
+    
+    # Third Party apps
+    "crispy_forms",
 ]
 
 MIDDLEWARE = [
@@ -126,3 +130,8 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+LOGIN_REDIRECT_URL = 'admin_home_view'
+LOGOUT_REDIRECT_URL = '/'
