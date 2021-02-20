@@ -1,0 +1,55 @@
+{% extends "admin_panel/admin_home.html" %} {% block content %}<!---->
+{% load crispy_forms_tags %}
+<div class="container">
+    <h1>Edit post</h1>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %} {{ form | crispy }}
+        <div class="row">
+            {% for image in tour.tourimage.all %}
+            <div class="col-md-4" style="padding-bottom: 10px">
+                {{image.id}}
+                <div class="thumbnail">
+                    <img
+                        src="{{ image.image.url }}"
+                        alt="Lights"
+                        width="300"
+                        height="250"
+                        data-image-id="{{image.id}}"
+                    />
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <br />
+        <button id="delete-images" class="btn btn-danger" type="button">
+            Delete Selected Images
+        </button>
+        <br /><br />
+        <div class="form-group">
+            <label for="id_price" class="requiredField">
+                Add New Images<span class="asteriskField">*</span>
+            </label>
+            <div>
+                <input
+                    class="form-control"
+                    type="file"
+                    id="files"
+                    name="extra_images"
+                    multiple
+                />
+            </div>
+        </div>
+        <br /><br />
+        <input type="submit" value="Save Changes" />
+    </form>
+</div>
+{% endblock content %}
+<!---->
+{% load static %}
+<!---->
+{% block scripts %}
+<script src="{% static 'js/create_tour.js' %}"></script>
+<script type="text/javascript">
+    window.CSRF_TOKEN = "{{ csrf_token }}";
+</script>
+{% endblock scripts %}

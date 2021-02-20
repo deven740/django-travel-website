@@ -1,0 +1,39 @@
+{% extends "admin_panel/admin_home.html" %} {% block content %}<!--/////-->
+{% load crispy_forms_tags %}
+<center>
+    <h1>Create Tour Page</h1>
+    <div class="card-deck shadow-lg p-3 mb-5 bg-faded rounded">
+        <div class="card-body">
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %} {{ form | crispy }}
+                <div class="form-group">
+                    <label for="id_price" class="requiredField">
+                        Upload Images<span class="asteriskField">*</span>
+                    </label>
+                    <div>
+                        <input
+                            class="form-control"
+                            type="file"
+                            id="files"
+                            name="extra_images"
+                            multiple
+                        />
+                    </div>
+                </div>
+                <br />
+                <input type="submit" value="Save" />
+            </form>
+        </div>
+    </div>
+    <!-- <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %} {{ form | crispy }}
+        <input
+            type="file"
+            id="files"
+            name="extra_images"
+            multiple
+        /><br /><br />
+        <input type="submit" value="Save" />
+    </form> -->
+    {% endblock content %}
+</center>
