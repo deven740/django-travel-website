@@ -18,6 +18,19 @@ class AdminHomePageView(ListView):
     context_object_name = "tours"
     paginate_by = 4
     template_name = "admin_panel/view_tours.html"
+    
+    def get(self, request, *args, **kwargs):
+        print('hello')
+        return super().get(request, *args, **kwargs)
+    
+    def get_queryset(self):
+        query = self.request.GET.get('query', None)
+        queryset = Tour.objects.all()
+        
+        if query:
+            queryset = queryset.filter(name__icontains=query)
+        
+        return queryset
 
 
 class CreateTourView(CreateView):

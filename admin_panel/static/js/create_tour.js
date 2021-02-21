@@ -4,16 +4,13 @@ $(document).ready(function () {
     $("img").click(function () {
         image_id = $(this).data("image-id");
         if ($.inArray(image_id, image_id_array) != -1) {
-            console.log("is in array", image_id);
             image_index = image_id_array.indexOf(image_id);
             image_id_array.splice(image_index, 1);
             $(this).css("border", "None");
         } else {
             image_id_array.push(image_id);
-            console.log("not in array", image_id);
             $(this).css("border", "3px solid blue");
         }
-        console.log(image_id_array);
     });
 
     $("#delete-images").click(function () {

@@ -29,7 +29,10 @@
     </div>
 
     <!-- Working on this -->
-
+    <form action="{% url 'admin_home_view' %}" method="GET">
+        <input type="text" placeholder="Search" name="query" />
+        <input type="submit" value="Search" />
+    </form>
     <div class="card-deck row">
         {% for tour in tours %}
         <div class="col-xs-12 col-sm-6 col-md-4">
@@ -56,6 +59,7 @@
                         </a>
                     </h4>
                     <p class="card-text">{{tour.description}}</p>
+                    <p class="card-text"><b style="color: black;">{{tour.price}} &#8377;</b></p></b>
                 </div>
             </div>
         </div>
