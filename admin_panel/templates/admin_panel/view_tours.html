@@ -1,0 +1,86 @@
+{% extends "admin_panel/admin_home.html" %} {% block content %}<!---->
+{% load filters %}
+<div class="container">
+    <div class="card-deck shadow-lg p-3 mb-5 bg-faded rounded">
+        <div class="card bg-danger">
+            <div class="card-body">
+                <center>
+                    <h5 class="card-title">Unresolved Inquiries</h5>
+                    <h1 class="card-text">25</h1>
+                </center>
+            </div>
+        </div>
+        <div class="card bg-primary">
+            <div class="card-body">
+                <center>
+                    <h5 class="card-title">Tours Remaining</h5>
+                    <h1 class="card-text">25</h1>
+                </center>
+            </div>
+        </div>
+        <div class="card bg-success">
+            <div class="card-body">
+                <center>
+                    <h5 class="card-title">Tours Completed</h5>
+                    <h1 class="card-text">25</h1>
+                </center>
+            </div>
+        </div>
+    </div>
+
+    <!-- Working on this -->
+    <form action="{% url 'admin_home_view' %}" method="GET">
+        <input type="text" placeholder="Search" name="query" />
+        <input type="submit" value="Search" />
+    </form>
+    <div class="card-deck row">
+        {% for tour in tours %}
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <div class="card">
+                <div class="view overlay">
+                    <a href="{% url 'tour_detail_view' tour.pk %}">
+                        <img
+                            class="card-img-top"
+                            src="{{tour | tour_image_url}}"
+                            alt="Card image cap"
+                            width="250"
+                            height="200"
+                        />
+                    </a>
+                    <a href="#!">
+                        <div class="mask rgba-white-slight"></div>
+                    </a>
+                </div>
+
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <a href="{% url 'tour_detail_view' tour.pk %}"
+                            >{{tour.name}}
+                        </a>
+                    </h4>
+                    <p class="card-text">{{tour.description}}</p>
+                    <p class="card-text"><b style="color: black;">{{tour.price}} &#8377;</b></p></b>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <br /><br />
+    <div class="pagination">
+        <span class="step-links">
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages}}.
+            </span>
+            <br /><br />
+            {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %} {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+{% endblock content %}
